@@ -1,0 +1,5 @@
+{
+    "response_format": "table",
+    "table_headers": ["Horse Name", "Odds", "Additional Info"],
+    "format_instructions": "When presenting lists of horses with odds, output the data in a table with headers 'Horse Name', 'Odds', and 'Additional Info'."
+}
