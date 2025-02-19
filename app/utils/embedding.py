@@ -1,15 +1,18 @@
 # app/utils/embedding.py
+import os
+import openai
 from app.core.logging import logger
-from sentence_transformers import SentenceTransformer
 
-# Load the pre-trained Sentence Transformer model
-model = SentenceTransformer('all-MiniLM-L6-v2')
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 def generate_embedding(text: str) -> list:
     try:
-        # Generate the embedding for the input text
-        embedding = model.encode(text)
-        return embedding.tolist()  # Convert to list for consistency
+        response = openai.embeddings.create(
+            input=text,
+            model="text-embedding-3-large" 
+        )
+        embedding = response["data"][0].embedding
+        return embedding
     except Exception as e:
         logger.error("Error generating embedding: %s", e)
         return []
